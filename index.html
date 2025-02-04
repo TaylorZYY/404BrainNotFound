@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MQTT Data</title>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    #messages {
+      margin-top: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      text-align: left;
+      max-width: 400px;
+    }
+    .data-field {
+      font-size: 18px;
+      font-weight: bold;
+      color: #007BFF;
+      margin-bottom: 5px;
+    }
+    .error-message {
+      font-size: 18px;
+      color: red;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>MQTT Data</h1>
+  <div id="messages">
+    <p>Waiting for data...</p>
+  </div>
+
+  <script>
+    const socket = io();
+
+    socket.on('mqtt_message', function(data) {
+      const messagesDiv = document.getElementById('messages');
+      messagesDiv.innerHTML = ''; // 清空之前的内容
+
+      try {
+        const payload = data.payload;  // 获取 JSON 数据
+        
+        if (payload.error) {
+          messagesDiv.innerHTML = `<p class="error-message">${payload.error}</p>`;
+          return;
+        }
+
+        // 创建数据展示列表
+        let htmlContent = `<p class="data-field">📅 Time: ${payload.timestamp || "Unknown"}</p>`;
+
+        if (payload.environment) {
+          htmlContent += `<ul>
+            <li><b>🌡️ Temprature:</b> ${payload.environment.temperature}°C</li>
+            <li><b>💧 Humidity:</b> ${payload.environment.humidity}%</li>
+            <li><b>🌬️ Pressure:</b> ${payload.environment.pressure} hPa</li>
+          </ul>`;
+        }
+
+        if (payload.motion && payload.motion.acceleration) {
+          htmlContent += `<p class="data-field">🔄 Motion:</p>
+          <ul>
+            <li><b>↔️ X :</b> ${payload.motion.acceleration.x} m/s²</li>
+            <li><b>↕️ Y :</b> ${payload.motion.acceleration.y} m/s²</li>
+            <li><b>🔄 Z :</b> ${payload.motion.acceleration.z} m/s²</li>
+          </ul>`;
+        }
+
+        htmlContent += `<p><b>📟 Sensor ID:</b> ${payload.sensor_id || "Unkown"}</p>`;
+
+        messagesDiv.innerHTML = htmlContent;
+
+      } catch (error) {
+        messagesDiv.innerHTML = `<p class="error-message">Can't read data.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

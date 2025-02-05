@@ -18,12 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 智能空气质量监测器
+title: Smart Fitness Watch
 author: Your Name
 email: your@email.com
-description: > # 你的网站描述
-  监测 CO₂、温湿度,提供空气质量预警系统
-theme: minima  # GitHub Pages 默认支持的 Jekyll 主题
+description: > 
+  Elevate Your Workout
+theme: minima
 
 
 # Build settings

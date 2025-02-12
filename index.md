@@ -5,6 +5,8 @@ title: "Smart Fitness Watch"
 # Smart Fitness Watch | Your Ultimate Fitness Companion
 The **ultimate smart fitness watch** that keeps track of your workouts and environment, helping you stay **healthy and active**.
 
+![Smartwatch Display](images/smartwatch_display.png)
+
 ## Accurate Monitoring for Smarter Workouts
 Put on the smart sports watch and enhance every workout. Equipped with advanced sensors, it continuously monitors **altitude, air quality, humidity, body temperature, and ambient temperature**, ensuring you stay informed about both your environment and physical condition. With an intelligent algorithm, measurements are more precise, providing professional support for your health and fitness.
 

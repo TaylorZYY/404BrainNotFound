@@ -19,6 +19,8 @@ Each registered user has access to a **personalized fitness database**, where al
 ## Watch the Video
 <iframe width="560" height="315" src="https://www.youtube.com/test" frameborder="0" allowfullscreen></iframe>
 
+#More Details!
+
 ![Smartwatch Display](images/raspi.jpg)
 - We have screen to display and working mode to choose
 

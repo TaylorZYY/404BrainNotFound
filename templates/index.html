@@ -1,78 +1,196 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MQTT Data</title>
+  <title>Exercise Monitoring System</title>
   <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4; }
     h1 { color: #333; }
-    #messages { margin-top: 20px; padding: 15px; background: white; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); display: inline-block; text-align: left; max-width: 400px; }
-    .data-field { font-size: 18px; font-weight: bold; color: #007BFF; margin-bottom: 5px; }
-    .error-message { font-size: 18px; color: red; }
-    button { padding: 10px 20px; margin: 10px; font-size: 16px; border: none; cursor: pointer; border-radius: 5px; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); }
+    input, button, select { padding: 10px; margin: 10px; font-size: 16px; border: none; border-radius: 5px; }
+    button { cursor: pointer; }
     #start { background-color: #28a745; color: white; }
     #stop { background-color: #dc3545; color: white; }
+    #showHistory { background-color: #007BFF; color: white; }
+    button:disabled { background-color: #aaa; cursor: not-allowed; }
+    .error-message { color: red; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>MQTT Data</h1>
-  <button id="start">开始</button>
-  <button id="stop">停止</button>
+  <h1>Exercise Monitoring System</h1>
+  <div class="container">
+    <div id="authSection">
+      <h2>Login / Register</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <button onclick="register()">Register</button>
+    </div>
 
-  <div id="messages">
-    <p>Waiting for data...</p>
+    <div id="userSection" style="display: none;">
+      <p>Welcome, <span id="currentUser"></span>! <button onclick="logout()">Logout</button></p>
+      
+      <div id="status">
+        Device Status: <span id="deviceStatus">Checking...</span>
+      </div>
+
+      <div id="exerciseSelection">
+        <label for="exerciseType">Select Exercise Type: </label>
+        <select id="exerciseType">
+          <option value="walking">Walking</option>
+          <option value="running">Running</option>
+          <option value="jump_rope">Jump Rope</option>
+          <option value="stair_climbing">Stair Climbing</option>
+        </select>
+      </div>
+
+      <button id="start" onclick="startExercise()">Start Exercise</button>
+      <button id="stop" onclick="stopExercise()">Stop Exercise</button>
+      <button id="showHistory" onclick="fetchHistory()">Show History</button>
+
+      <div id="messages">
+        <p>Waiting for data...</p>
+      </div>
+
+      <div id="historyContainer" style="display: none;">
+        <h3>Exercise History</h3>
+        <div id="historyContent"></div>
+      </div>
+    </div>
   </div>
 
   <script>
     const socket = io();
+    const deviceStatusSpan = document.getElementById('deviceStatus');
 
-    socket.on('mqtt_message', function(data) {
-      const messagesDiv = document.getElementById('messages');
-      messagesDiv.innerHTML = '';
-
-      try {
-        const payload = data.payload;
-
-        let htmlContent = `<p class="data-field">📅 时间: ${payload.timestamp || "未知"}</p>`;
-        if (payload.environment) {
-          htmlContent += `<p class="data-field">🌡️ 温度: ${payload.environment.temperature}°C</p>`;
-          htmlContent += `<p class="data-field">💧 湿度: ${payload.environment.humidity}%</p>`;
-          htmlContent += `<p class="data-field">🌬️ 气压: ${payload.environment.pressure} hPa</p>`;
-        }
-        if (payload.motion && payload.motion.acceleration) {
-          htmlContent += `<p class="data-field">↔️ 加速度 (X, Y, Z): ${payload.motion.acceleration.x}, ${payload.motion.acceleration.y}, ${payload.motion.acceleration.z} m/s²</p>`;
-        }
-        htmlContent += `<p class="data-field">📟 传感器 ID: ${payload.sensor_id || "未知"}</p>`;
-
-        messagesDiv.innerHTML = htmlContent;
-      } catch (error) {
-        messagesDiv.innerHTML = `<p class="error-message">数据解析错误</p>`;
-      }
-    });
-
-    document.getElementById('start').addEventListener('click', function() {
-      fetch('/start', { method: 'POST' })
+    function checkDeviceStatus() {
+      fetch('/device_status')
         .then(response => response.json())
-        .then(data => alert(data.message))
-        .catch(error => console.error('Error:', error));
-    });
+        .then(data => {
+          deviceStatusSpan.textContent = data.device_connected ? "Connected" : "Not Connected";
+          document.getElementById('start').disabled = !data.device_connected;
+          document.getElementById('stop').disabled = !data.device_connected;
+        })
+        .catch(error => console.error("Error checking device status:", error));
+    }
+    setInterval(checkDeviceStatus, 5000);
+    checkDeviceStatus();
 
-    document.getElementById('stop').addEventListener('click', function() {
-      fetch('/stop', { method: 'POST' })
-        .then(response => response.json())
-        .then(data => alert(data.message))
-        .catch(error => console.error('Error:', error));
-    });
-  </script>
-</body>
-</html>
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
 
-      } catch (error) {
-        messagesDiv.innerHTML = `<p class="error-message">Can't read data.</p>`;
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.access_token) {
+          localStorage.setItem('token', data.access_token);
+          localStorage.setItem('username', username);
+          updateUI();
+        } else {
+          alert("Login failed: " + data.message);
+        }
+      })
+      .catch(error => console.error("Error:", error));
+    }
+
+    function register() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => response.json())
+      .then(data => alert(data.message))
+      .catch(error => console.error("Error:", error));
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      updateUI();
+    }
+
+    function updateUI() {
+      const token = localStorage.getItem('token');
+      const username = localStorage.getItem('username');
+
+      if (token) {
+        document.getElementById('authSection').style.display = "none";
+        document.getElementById('userSection').style.display = "block";
+        document.getElementById('currentUser').textContent = username;
+      } else {
+        document.getElementById('authSection').style.display = "block";
+        document.getElementById('userSection').style.display = "none";
       }
-    });
+    }
+
+    function startExercise() {
+      const token = localStorage.getItem('token');
+      if (!token) return alert("Please log in first!");
+
+      fetch('/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ exercise_type: document.getElementById('exerciseType').value })
+      })
+      .then(response => response.json())
+      .then(data => alert(data.message))
+      .catch(error => console.error('Error:', error));
+    }
+
+    function stopExercise() {
+      const token = localStorage.getItem('token');
+      if (!token) return alert("Please log in first!");
+
+      fetch('/stop', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token }
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('messages').innerHTML = `<h3>Exercise completed</h3>
+          <p>Total Time: ${data.total_time} seconds</p>
+          <p>Exercise Type: ${data.exercise_type}</p>
+          <p>Steps: ${data.total_steps}</p>
+          <p>Distance: ${data.total_distance} meters</p>
+          <p>Average Speed: ${data.avg_speed} m/s</p>
+          <p>Calories Burned: ${data.calories_burned} kcal</p>`;
+      })
+      .catch(error => console.error('Error:', error));
+    }
+
+    function fetchHistory() {
+      const token = localStorage.getItem('token');
+      if (!token) return alert("Please log in first!");
+
+      fetch('/history', {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+      })
+      .then(response => response.json())
+      .then(data => {
+        let tableHtml = `<table><tr><th>Time</th><th>Type</th><th>Duration</th><th>Steps</th><th>Distance</th><th>Speed</th><th>Calories</th></tr>`;
+        data.records.forEach(rec => {
+          tableHtml += `<tr><td>${rec.timestamp}</td><td>${rec.exercise_type}</td><td>${rec.total_time}</td><td>${rec.total_steps}</td><td>${rec.total_distance}</td><td>${rec.avg_speed}</td><td>${rec.calories_burned}</td></tr>`;
+        });
+        tableHtml += `</table>`;
+        document.getElementById('historyContent').innerHTML = tableHtml;
+        document.getElementById('historyContainer').style.display = "block";
+      })
+      .catch(error => console.error('Error fetching history:', error));
+    }
+
+    window.onload = updateUI;
   </script>
 </body>
 </html>

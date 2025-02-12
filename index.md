@@ -10,14 +10,16 @@ The **ultimate smart fitness watch** that keeps track of your workouts and envir
 ## Accurate Monitoring for Smarter Workouts
 Put on the smart sports watch and enhance every workout. Equipped with advanced sensors, it continuously monitors **altitude, air quality, humidity, body temperature, and ambient temperature**, ensuring you stay informed about both your environment and physical condition. With an intelligent algorithm, measurements are more precise, providing professional support for your health and fitness.
 
-## Watch the Video
-<iframe width="560" height="315" src="https://www.youtube.com/test" frameborder="0" allowfullscreen></iframe>
-
 ## High-Definition Display for Quick Insights
 A clear and intuitive display interface ensures that key workout data stands out. **The watch’s core functions are highlighted while other elements fade into the background**, allowing you to focus on the most important information. No need to fumble for stats while running—your vital data is always within view, empowering you to push your limits.
 
 ## Private Database, Secure and Encrypted
 Each registered user has access to a **personalized fitness database**, where all historical data and account information are encrypted for maximum security. Your workout records **sync automatically**, allowing you to track progress anytime and refine your training plan.
+
+## Watch the Video
+<iframe width="560" height="315" src="https://www.youtube.com/test" frameborder="0" allowfullscreen></iframe>
+
+![Smartwatch Display](images/raspi.jpg)
 
 ## Multiple Workout Modes, Accurate Tracking
 The smart watch supports various exercise modes, allowing users to switch between them effortlessly:

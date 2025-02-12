@@ -5,7 +5,8 @@ title: "Smart Fitness Watch"
 
 <link rel="stylesheet" href="style.css">
 
-# Smart Fitness Watch | Secure, Accurate, and Personalized for You
+# Smart Fitness Watch
+# Secure, Accurate, and Personalized for You
 The **ultimate smart fitness watch** that keeps track of your workouts and environment, helping you stay **healthy and active**.
 
 ![Smartwatch Display](images/smartwatch_display.jpg)

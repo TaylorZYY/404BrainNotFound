@@ -1,0 +1,111 @@
+/* 🌟 全局样式 - 浅色科技风 */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: linear-gradient(135deg, #f4f6f9, #e3eaf2);
+  color: #333;
+}
+
+/* 🌟 顶部导航栏 */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 50px;
+  background: rgba(255, 255, 255, 0.8); /* 玻璃拟态背景 */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 导航栏文字 */
+.navbar a {
+  color: #333; /* 让文字变深 */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: #007bff; /* 鼠标悬停变蓝色 */
+}
+
+/* 🌟 主页标题 */
+h1 {
+  font-size: 48px;
+  margin-top: 100px;
+  color: #222;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌟 主要内容 - 玻璃拟态卡片 */
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.container:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 🌟 霓虹高亮按钮 */
+.button {
+  display: inline-block;
+  padding: 15px 30px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: linear-gradient(90deg, #0056b3, #003f8c);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* 🌟 视频嵌入 */
+iframe {
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌟 响应式设计 */
+@media (max-width: 768px) {
+  h1 {
+      font-size: 32px;
+  }
+  .container {
+      width: 90%;
+  }
+}
+
+/* 🌟 文字动画 */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+h1 {
+  animation: fadeIn 1.5s ease-in-out;
+}

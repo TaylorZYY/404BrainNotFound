@@ -24,5 +24,14 @@ Featuring **database logging**, the watch records and stores long-term data, ena
 ## Your Fitness Data, Smarter Than Ever
 The smart sports watch is **not just a fitness assistant—it’s your personal health guardian**. With precise monitoring, intelligent analysis, and future-proof expandability, it elevates your workout experience to the next level. Wear it now and step into a smarter, more scientific way of training!
 
+## Future Prospects: Expanding Functionality Beyond the Watch
+While the current smart sports watch already offers comprehensive monitoring and analysis, future innovations will further enhance its adaptability across various sports and environments. Potential expansions include:
+
+- Smart Gloves – Designed with built-in temperature sensors to monitor hand temperature, ideal for extreme sports and cold environments.
+- Smart Helmet – Equipped with an embedded speed measurement module for real-time speed tracking in activities like cycling and skiing.
+- Smart Glasses – Featuring an integrated laser rangefinder to measure distances in outdoor sports, improving spatial awareness.
+
+These future developments aim to bring more intelligent and customized sports solutions, expanding the possibilities of wearable fitness technology.
+
 ## 📥 Get Yours Today!
 👉 **[Order Now](#)** | 📱 **[Download the App](#)**  

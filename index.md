@@ -14,12 +14,12 @@ A clear and intuitive display interface ensures that key workout data stands out
 ## Smart Data Recording for Effective Analysis
 Featuring **database logging**, the watch records and stores long-term data, enabling you to track your progress and analyze fitness trends.
 
-## 🎥 Watch the Video
+## Watch the Video
 <iframe width="560" height="315" src="https://www.youtube.com/test" frameborder="0" allowfullscreen></iframe>
 
-## 🚀 Why Choose Smart Fitness Watch?
-✅ **Track Your Performance** – Get insights on your workout, steps, distance, and calories burned.  
-✅ **Monitor Your Surroundings** – Temperature, humidity, and air quality sensors ensure you breathe clean air.  
+## Why Choose Smart Fitness Watch?
+**Track Your Performance** – Get insights on your workout, steps, distance, and calories burned.  
+**Monitor Your Surroundings** – Temperature, humidity, and air quality sensors ensure you breathe clean air.  
 
 ## Your Fitness Data, Smarter Than Ever
 The smart sports watch is **not just a fitness assistant—it’s your personal health guardian**. With precise monitoring, intelligent analysis, and future-proof expandability, it elevates your workout experience to the next level. Wear it now and step into a smarter, more scientific way of training!

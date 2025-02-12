@@ -20,6 +20,7 @@ Each registered user has access to a **personalized fitness database**, where al
 <iframe width="560" height="315" src="https://www.youtube.com/test" frameborder="0" allowfullscreen></iframe>
 
 ![Smartwatch Display](images/raspi.jpg)
+- We have screen to display and working mode to choose
 
 ## Multiple Workout Modes, Accurate Tracking
 The smart watch supports various exercise modes, allowing users to switch between them effortlessly:

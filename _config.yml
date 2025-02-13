@@ -19,8 +19,8 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Smart Fitness Watch
-author: Your Name
-email: your@email.com
+author: 404BrainNotFound
+email: 404BrainNotFound@email.com
 description: > 
   Elevate Your Workout
 theme: minima

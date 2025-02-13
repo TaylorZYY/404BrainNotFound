@@ -25,7 +25,7 @@ Each registered user has access to a **personalized fitness database**, where al
 
 # More Details!
 
-![Smartwatch Display](images/raspi.jpg)
+![Smartwatch Display](images/raspi2.jpg)
 - We have screen to display and working mode to choose
 
 ## Multiple Workout Modes, Accurate Tracking

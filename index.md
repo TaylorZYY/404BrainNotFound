@@ -21,10 +21,14 @@ A clear and intuitive display interface ensures that key workout data stands out
 Each registered user has access to a **personalized fitness database**, where all historical data and account information are encrypted for maximum security. Your workout records **sync automatically**, allowing you to track progress anytime and refine your training plan.
 
 ## Watch the Video
-<video controls width="600">
-  <source src="video.mp4" type="video/mp4">
-  你的浏览器不支持 HTML5 视频
-</video>
+<iframe width="560" height="315" 
+        src="https://www.youtube.com/embed/wMRtMBnDV7w" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+</iframe>
+
 
 
 # More Details!
